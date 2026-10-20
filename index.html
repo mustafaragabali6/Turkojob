@@ -66,6 +66,11 @@
       transform: translateY(-3px);
       box-shadow: 0 16px 30px -10px rgba(0, 0, 0, 0.6);
     }
+    .nav-card-active {
+      transform: scale(1.02);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+      border-width: 2px !important;
+    }
     @keyframes pulse-subtle {
       0%, 100% { opacity: 1; }
       50% { opacity: 0.6; }
@@ -111,20 +116,24 @@
             <span class="px-2 py-0.5 text-[11px] font-bold rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">مصر والوطن العربي</span>
           </div>
           <p class="text-xs text-slate-400 hidden sm:block">
-            محرك وظائف اللغة التركية الشامل • صانع السير الذاتية الإنجليزية • محاكي المقابلات بالكاميرا
+            محرك وظائف اللغة التركية الشامل • صانع السير الذاتية الإنجليزية • محاكي المقابلات بالكاميرا والصوت
           </p>
         </div>
       </div>
 
-      <!-- Quick Stats & Alerts Button -->
-      <div class="hidden lg:flex items-center gap-6 text-xs">
+      <!-- Quick Status Badges -->
+      <div class="hidden lg:flex items-center gap-4 text-xs">
+        <div id="headerCvStatusBadge" class="flex items-center gap-2 text-slate-300 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800">
+          <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse"></span>
+          <span>حالة الـ CV: <strong id="headerCvStatusText" class="text-amber-400 font-bold">غير مسجل (الوظائف مقفلة)</strong></span>
+        </div>
         <div class="flex items-center gap-2 text-slate-300 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800">
-          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span>الوظائف النشطة بمصر والخليج: <strong id="headerJobCount" class="text-emerald-400 font-bold">18</strong> فرصة</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+          <span>الوظائف الموثقة: <strong id="headerJobCount" class="text-emerald-400 font-bold">18</strong> فرصة</span>
         </div>
         <div class="flex items-center gap-2 text-slate-300 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800">
           <span class="w-2.5 h-2.5 rounded-full bg-blue-400"></span>
-          <span>منشورات السوشيال: <strong id="headerSocialCount" class="text-blue-400 font-bold">8</strong> منشورات</span>
+          <span>السوشيال: <strong id="headerSocialCount" class="text-blue-400 font-bold">8</strong></span>
         </div>
       </div>
 
@@ -140,49 +149,132 @@
 
         <button id="openAlertsModalBtn" class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white transition shadow-md shadow-emerald-950/40">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
-          <span class="hidden md:inline">تنبيهات الفرص (إيميل وواتساب)</span>
+          <span class="hidden md:inline">تنبيهات الفرص</span>
           <span class="md:hidden">تنبيهات</span>
         </button>
       </div>
     </div>
-
-    <!-- Navigation Tabs -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-800/60 flex space-x-reverse space-x-1 sm:space-x-reverse sm:space-x-4 overflow-x-auto">
-      
-      <button data-tab="jobs" class="tab-btn px-4 py-3 text-sm font-bold border-b-2 border-emerald-500 text-emerald-400 flex items-center gap-2 transition whitespace-nowrap">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-        دليل وظائف مصر والوطن العربي
-      </button>
-
-      <button data-tab="social" class="tab-btn px-4 py-3 text-sm font-semibold border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 transition whitespace-nowrap">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path></svg>
-        رادار بوستات السوشيال وجروبات التوظيف
-        <span class="bg-rose-500 text-white text-[10px] px-1.5 py-0.2 rounded-full font-bold mr-1">لايف</span>
-      </button>
-
-      <button data-tab="cvBuilder" class="tab-btn px-4 py-3 text-sm font-semibold border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 transition whitespace-nowrap">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-        صانع وصائغ السير الذاتية الإنجليزية (CV)
-      </button>
-
-      <button data-tab="aiInterview" class="tab-btn px-4 py-3 text-sm font-semibold border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 transition whitespace-nowrap">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-        محاكي المقابلات بالكاميرا والذكاء الاصطناعي
-        <span class="bg-emerald-500 text-slate-950 text-[10px] px-1.5 py-0.2 rounded-full font-black mr-1">كاميرا AI</span>
-      </button>
-
-      <button data-tab="profileAnalysis" class="tab-btn px-4 py-3 text-sm font-semibold border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 transition whitespace-nowrap">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-        تحليل القبول والنواقص
-      </button>
-    </div>
   </header>
 
+  <!-- ======================================================== -->
+  <!-- 5 COLORFUL STACKED SECTION CARDS (MOBILE-FIRST NAVIGATION)-->
+  <!-- Each has its own distinct color & opens the section      -->
+  <!-- ======================================================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-2 w-full">
+    <div class="mb-3 text-right">
+      <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+        <span>اختر القسم لتصفحه فوراً (مرتبة بالألوان لسهولة الاستخدام على الموبايل):</span>
+      </h2>
+    </div>
+
+    <!-- Stacked Cards Container -->
+    <div class="flex flex-col gap-3">
+      
+      <!-- Section 1: Emerald (Jobs) -->
+      <button data-nav-target="jobs" class="nav-stack-card group text-right p-4 rounded-2xl bg-gradient-to-r from-emerald-900/90 via-emerald-800 to-teal-950 border border-emerald-500/40 hover:border-emerald-400 transition shadow-lg shadow-emerald-950/30 flex items-center justify-between gap-4 card-hover nav-card-active">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 flex items-center justify-center shrink-0 shadow-inner">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-base sm:text-lg font-black text-white group-hover:text-emerald-200">دليل وظائف مصر والوطن العربي</span>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-400 text-slate-950">18 فرصة</span>
+            </div>
+            <p class="text-xs text-emerald-100/80 mt-0.5">وظائف كبرى الشركات الموثقة (Concentrix, Vodafone, TP) بروابط تقديم حقيقية ومباشرة</p>
+          </div>
+        </div>
+        <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-300 flex items-center justify-center shrink-0">
+          <svg class="w-5 h-5 transition-transform group-hover:translate-x-[-3px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        </div>
+      </button>
+
+      <!-- Section 2: Blue (Social Radar) -->
+      <button data-nav-target="social" class="nav-stack-card group text-right p-4 rounded-2xl bg-gradient-to-r from-blue-900/90 via-indigo-900 to-slate-950 border border-blue-500/40 hover:border-blue-400 transition shadow-lg shadow-blue-950/30 flex items-center justify-between gap-4 card-hover">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-xl bg-blue-500/20 border border-blue-400/40 text-blue-300 flex items-center justify-center shrink-0 shadow-inner">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path></svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-base sm:text-lg font-black text-white group-hover:text-blue-200">رادار بوستات السوشيال وجروبات التوظيف</span>
+              <span class="text-[10px] font-black px-2 py-0.5 rounded-full bg-rose-600 text-white animate-pulse">لايف</span>
+            </div>
+            <p class="text-xs text-blue-100/80 mt-0.5">رصد فوري لبوستات الـ HR في جروبات فيسبوك ولينكد إن مع أرقام واتساب مباشرة</p>
+          </div>
+        </div>
+        <div class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-300 flex items-center justify-center shrink-0">
+          <svg class="w-5 h-5 transition-transform group-hover:translate-x-[-3px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        </div>
+      </button>
+
+      <!-- Section 3: Purple (CV Builder) -->
+      <button data-nav-target="cvBuilder" class="nav-stack-card group text-right p-4 rounded-2xl bg-gradient-to-r from-purple-900/90 via-violet-900 to-slate-950 border border-purple-500/40 hover:border-purple-400 transition shadow-lg shadow-purple-950/30 flex items-center justify-between gap-4 card-hover">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-xl bg-purple-500/20 border border-purple-400/40 text-purple-300 flex items-center justify-center shrink-0 shadow-inner">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-base sm:text-lg font-black text-white group-hover:text-purple-200">صانع وصائغ السير الذاتية الإنجليزية (CV)</span>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-400 text-slate-950">ATS Official</span>
+            </div>
+            <p class="text-xs text-purple-100/80 mt-0.5">نماذج معتمدة وميزة "اكتب كل حاجة عنك" ليصيغ لك CV إنجليزي فخم يفتح الوظائف</p>
+          </div>
+        </div>
+        <div class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-300 flex items-center justify-center shrink-0">
+          <svg class="w-5 h-5 transition-transform group-hover:translate-x-[-3px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        </div>
+      </button>
+
+      <!-- Section 4: Red (AI Video Interview) -->
+      <button data-nav-target="aiInterview" class="nav-stack-card group text-right p-4 rounded-2xl bg-gradient-to-r from-red-950 via-rose-900 to-slate-950 border border-red-500/40 hover:border-red-400 transition shadow-lg shadow-red-950/30 flex items-center justify-between gap-4 card-hover">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-xl bg-red-500/20 border border-red-400/40 text-red-300 flex items-center justify-center shrink-0 shadow-inner">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-base sm:text-lg font-black text-white group-hover:text-red-200">محاكي المقابلات بالكاميرا والذكاء الاصطناعي</span>
+              <span class="text-[10px] font-black px-2 py-0.5 rounded-full bg-red-600 text-white">كاميرا AI</span>
+            </div>
+            <p class="text-xs text-red-100/80 mt-0.5">مقابلة واقعية بالكاميرا والصوت (تركي وإنجليزي) مع تصحيح الأخطاء وسؤال الراتب</p>
+          </div>
+        </div>
+        <div class="w-8 h-8 rounded-full bg-red-500/20 text-red-300 flex items-center justify-center shrink-0">
+          <svg class="w-5 h-5 transition-transform group-hover:translate-x-[-3px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        </div>
+      </button>
+
+      <!-- Section 5: Amber (Gap Analysis) -->
+      <button data-nav-target="profileAnalysis" class="nav-stack-card group text-right p-4 rounded-2xl bg-gradient-to-r from-amber-950 via-orange-900 to-slate-950 border border-amber-500/40 hover:border-amber-400 transition shadow-lg shadow-amber-950/30 flex items-center justify-between gap-4 card-hover">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-xl bg-amber-500/20 border border-amber-400/40 text-amber-300 flex items-center justify-center shrink-0 shadow-inner">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-base sm:text-lg font-black text-white group-hover:text-amber-200">تحليل القبول والنواقص</span>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-400 text-slate-950">Match %</span>
+            </div>
+            <p class="text-xs text-amber-100/80 mt-0.5">حساب نسبة القبول الدقيقة في كل شركة وكشف النواقص لتصل إلى 95% فما فوق</p>
+          </div>
+        </div>
+        <div class="w-8 h-8 rounded-full bg-amber-500/20 text-amber-300 flex items-center justify-center shrink-0">
+          <svg class="w-5 h-5 transition-transform group-hover:translate-x-[-3px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        </div>
+      </button>
+
+    </div>
+  </section>
+
   <!-- Main Container -->
-  <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+  <main id="mainSectionsContainer" class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full">
 
     <!-- ======================================================== -->
     <!-- TAB 1: JOBS HUB IN EGYPT & ARAB WORLD                   -->
+    <!-- LOCKED BY DEFAULT UNTIL CV IS UPLOADED / SAVED          -->
     <!-- ======================================================== -->
     <section id="tab-jobs" class="space-y-6">
       
@@ -198,7 +290,7 @@
               <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300">مصر والخليج وعن بُعد</span>
             </h2>
             <p class="text-xs text-slate-300 mt-1 leading-relaxed">
-              جميع الوظائف المدرجة هنا تم فحصها والتأكد من فتح صفحة واستمارة التقديم الرسمية فوراً بدون روابط وهمية أو صفحات 404، مع توافر أرقام وإيميلات مسؤولي التوظيف (HR) المباشرة للتقديم الفوري.
+              جميع الوظائف المدرجة تم فحصها والتأكد من فتح صفحة واستمارة التقديم الرسمية فوراً بدون روابط وهمية أو صفحات 404، مع توافر أرقام وإيميلات مسؤولي التوظيف (HR) المباشرة للتقديم الفوري.
             </p>
           </div>
         </div>
@@ -218,89 +310,155 @@
         </div>
       </div>
 
-      <!-- Filters & Search Toolbar -->
-      <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-4">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <!-- ======================================================== -->
+      <!-- CV GATEWAY LOCK CARD: Shown when CV is not saved/uploaded-->
+      <!-- ======================================================== -->
+      <div id="cvLockGateCard" class="p-8 sm:p-12 rounded-3xl bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900 border-2 border-amber-500/60 shadow-2xl text-center space-y-6">
+        
+        <div class="w-20 h-20 mx-auto rounded-3xl bg-amber-500/20 border-2 border-amber-500 text-amber-400 flex items-center justify-center shadow-lg shadow-amber-950/50">
+          <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+        </div>
+
+        <div class="max-w-2xl mx-auto space-y-2">
+          <span class="text-xs font-black text-amber-400 uppercase tracking-widest px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30">
+            تنبيه هام للتقديم والقبول
+          </span>
+          <h3 class="text-xl sm:text-2xl font-black text-white">
+            الوظائف الموثقة ونسب القبول وروابط التقديم مقفلة حالياً
+          </h3>
+          <p class="text-sm text-slate-300 leading-relaxed pt-2">
+            عذراً، لعرض جميع الوظائف الحقيقية ونسب القبول وروابط التقديم المباشرة، <strong>يجب عليك أولاً تسجيل ورفع السيرة الذاتية (CV) أو تصميمها وحفظها عبر المنصة</strong> لتفعيل حسابك ومطابقة متطلبات الشركات لمهاراتك بدقة قبل التقديم.
+          </p>
+        </div>
+
+        <!-- Action Buttons to Unlock -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-lg mx-auto pt-2">
           
-          <!-- Search Input -->
-          <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">بحث بالشركة أو المسمى أو المدينة</label>
-            <div class="relative">
-              <input type="text" id="filterSearch" placeholder="مثال: Concentrix, Vodafone, المعادي..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 pr-9">
-              <svg class="w-4 h-4 text-slate-400 absolute right-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          <button id="gateOpenCvBuilderBtn" class="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-black text-xs transition flex items-center justify-center gap-2 shadow-xl shadow-purple-950/50">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+            <span>صياغة وتصميم الـ CV بالإنجليزية وحفظه</span>
+          </button>
+
+          <label class="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs transition flex items-center justify-center gap-2 shadow-xl shadow-emerald-950/50 cursor-pointer">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+            <span>رفع ملف السيرة الذاتية (PDF/Word)</span>
+            <input type="file" id="gateUploadFileInput" accept=".pdf,.doc,.docx,.txt" class="hidden">
+          </label>
+
+        </div>
+
+        <!-- Fast One-click test button -->
+        <div class="pt-4 border-t border-slate-800/80 max-w-md mx-auto flex items-center justify-between text-xs text-slate-400">
+          <span>تريد تجربة التصفح الفوري الآن؟</span>
+          <button id="gateQuickUnlockBtn" class="text-emerald-400 hover:text-emerald-300 font-bold underline transition">
+            تفعيل فوري بحساب مرشح معتمد (Quick Unlock)
+          </button>
+        </div>
+
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- UNLOCKED SECTION: Filters & Jobs Grid (Shown when unlocked) -->
+      <!-- ======================================================== -->
+      <div id="unlockedJobsContent" class="hidden space-y-6">
+        
+        <!-- Active Unlock Indicator -->
+        <div class="p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/40 flex items-center justify-between text-xs text-emerald-300">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+            <span><strong>تم تفعيل حسابك بنجاح!</strong> تم ربط سيرتك الذاتية وتفعيل حساب نسب القبول وروابط التقديم المباشرة.</span>
+          </div>
+          <button id="lockJobsAgainBtn" class="text-slate-400 hover:text-white underline text-[11px]">
+            إعادة القفل للتجربة
+          </button>
+        </div>
+
+        <!-- Filters & Search Toolbar -->
+        <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            
+            <!-- Search Input -->
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">بحث بالشركة أو المسمى أو المدينة</label>
+              <div class="relative">
+                <input type="text" id="filterSearch" placeholder="مثال: Concentrix, Vodafone, المعادي..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 pr-9">
+                <svg class="w-4 h-4 text-slate-400 absolute right-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+              </div>
+            </div>
+
+            <!-- Region / Country Filter -->
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">الموقع الجغرافي / الدولة</label>
+              <select id="filterLocation" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500">
+                <option value="all">كل المواقع (مصر + الوطن العربي + عن بُعد)</option>
+                <option value="Egypt-Cairo">🇪🇬 مصر - القاهرة الكبرى (المعادي، التجمع، أكتوبر، الدقي)</option>
+                <option value="Egypt-Alex">🇪🇬 مصر - الإسكندرية والمحافظات</option>
+                <option value="Gulf">🇦🇪 🇸🇦 دول الخليج العربي (دبي، الرياض، الدوحة)</option>
+                <option value="Remote">🌐 عن بُعد من المنزل (Work From Home)</option>
+              </select>
+            </div>
+
+            <!-- Category Filter -->
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">المجال الوظيفي</label>
+              <select id="filterCategory" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500">
+                <option value="all">جميع المجالات (All Categories)</option>
+                <option value="Customer Support">خدمة عملاء ودعم محادثات (Call Center / Chat)</option>
+                <option value="Content Moderation">مراقبة محتوى وسلامة رقمية (Content Moderation)</option>
+                <option value="Translation">ترجمة عامة وتوطين نصوص (Translation)</option>
+                <option value="Simultaneous Translation">ترجمة فورية وتتبعية ومؤتمرات (Simultaneous Interpretation)</option>
+                <option value="Operations">عمليات وإدخال بيانات وتنسيق (Operations)</option>
+              </select>
+            </div>
+
+            <!-- Min Match Filter -->
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">الحد الأدنى لنسبة القبول (%)</label>
+              <select id="filterMatch" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500">
+                <option value="0">عرض الكل (0% فأكثر)</option>
+                <option value="60">فرصة مقبولة (+60%)</option>
+                <option value="75">فرصة جيدة جداً (+75%)</option>
+                <option value="85">فرصة مرتفعة وقبول مؤكد (+85%)</option>
+              </select>
             </div>
           </div>
 
-          <!-- Region / Country Filter -->
-          <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">الموقع الجغرافي / الدولة</label>
-            <select id="filterLocation" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500">
-              <option value="all">كل المواقع (مصر + الوطن العربي + عن بُعد)</option>
-              <option value="Egypt-Cairo">🇪🇬 مصر - القاهرة الكبرى (المعادي، التجمع، أكتوبر، الدقي)</option>
-              <option value="Egypt-Alex">🇪🇬 مصر - الإسكندرية والمحافظات</option>
-              <option value="Gulf">🇦🇪 🇸🇦 دول الخليج العربي (دبي، الرياض، الدوحة)</option>
-              <option value="Remote">🌐 عن بُعد من المنزل (Work From Home)</option>
-            </select>
-          </div>
-
-          <!-- Category Filter -->
-          <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">المجال الوظيفي</label>
-            <select id="filterCategory" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500">
-              <option value="all">جميع المجالات (All Categories)</option>
-              <option value="Customer Support">خدمة عملاء ودعم محادثات (Call Center / Chat)</option>
-              <option value="Content Moderation">مراقبة محتوى وسلامة رقمية (Content Moderation)</option>
-              <option value="Translation">ترجمة وتوطين نصوص (Translation)</option>
-              <option value="Operations">عمليات وإدخال بيانات وتنسيق (Operations)</option>
-              <option value="AI Training">تدريب نماذج الذكاء الاصطناعي (AI Data Training)</option>
-            </select>
-          </div>
-
-          <!-- Min Match Filter -->
-          <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">الحد الأدنى لنسبة القبول (%)</label>
-            <select id="filterMatch" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500">
-              <option value="0">عرض الكل (0% فأكثر)</option>
-              <option value="60">فرصة مقبولة (+60%)</option>
-              <option value="75">فرصة جيدة جداً (+75%)</option>
-              <option value="85">فرصة مرتفعة وقبول مؤكد (+85%)</option>
-            </select>
+          <!-- Filter Action Toolbar -->
+          <div class="flex flex-wrap items-center justify-between pt-2 border-t border-slate-800 text-xs text-slate-400 gap-2">
+            <div class="flex items-center gap-2">
+              <span>النتائج المعروضة:</span>
+              <span id="jobResultCount" class="font-bold text-white px-2 py-0.5 rounded bg-slate-800">10 وظائف</span>
+              <span class="text-slate-500">• مرتبة حسب فرصة القبول بناءً على مهاراتك</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-3">
+              <button id="resetFiltersBtn" class="text-slate-400 hover:text-white underline transition">إعادة ضبط الفلاتر</button>
+              <button id="sortToggleBtn" class="flex items-center gap-1 text-emerald-400 hover:text-emerald-300 font-semibold transition">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"></path></svg>
+                <span>الترتيب: <span id="sortOrderText">الأعلى قبولاً</span></span>
+              </button>
+            </div>
           </div>
         </div>
 
-        <!-- Filter Action Toolbar -->
-        <div class="flex flex-wrap items-center justify-between pt-2 border-t border-slate-800 text-xs text-slate-400 gap-2">
-          <div class="flex items-center gap-2">
-            <span>النتائج المعروضة:</span>
-            <span id="jobResultCount" class="font-bold text-white px-2 py-0.5 rounded bg-slate-800">10 وظائف</span>
-            <span class="text-slate-500">• مرتبة حسب فرصة القبول بناءً على مهاراتك</span>
-          </div>
-          <div class="flex flex-wrap items-center gap-3">
-            <button id="resetFiltersBtn" class="text-slate-400 hover:text-white underline transition">إعادة ضبط الفلاتر</button>
-            <button id="sortToggleBtn" class="flex items-center gap-1 text-emerald-400 hover:text-emerald-300 font-semibold transition">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"></path></svg>
-              <span>الترتيب: <span id="sortOrderText">الأعلى قبولاً</span></span>
-            </button>
-          </div>
+        <!-- Jobs Grid -->
+        <div id="jobsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- Rendered via JS -->
         </div>
+
+        <!-- Empty State -->
+        <div id="noJobsFound" class="hidden text-center py-16 bg-slate-900 rounded-2xl border border-slate-800">
+          <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-slate-800 flex items-center justify-center text-slate-500">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-1">لا توجد وظائف مطابقة للفلاتر المحددة</h3>
+          <p class="text-sm text-slate-400 mb-4">جرب تخفيف الفلاتر لإظهار المزيد من الوظائف المتاحة في مصر والوطن العربي.</p>
+          <button id="resetEmptyStateBtn" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-sm font-bold transition">
+            إعادة ضبط جميع الفلاتر
+          </button>
+        </div>
+
       </div>
 
-      <!-- Jobs Grid -->
-      <div id="jobsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <!-- Rendered via JS -->
-      </div>
-
-      <!-- Empty State -->
-      <div id="noJobsFound" class="hidden text-center py-16 bg-slate-900 rounded-2xl border border-slate-800">
-        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-slate-800 flex items-center justify-center text-slate-500">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-        </div>
-        <h3 class="text-lg font-bold text-white mb-1">لا توجد وظائف مطابقة للفلاتر المحددة</h3>
-        <p class="text-sm text-slate-400 mb-4">جرب تخفيف الفلاتر لإظهار المزيد من الوظائف المتاحة في مصر والوطن العربي.</p>
-        <button id="resetEmptyStateBtn" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-sm font-bold transition">
-          إعادة ضبط جميع الفلاتر
-        </button>
-      </div>
     </section>
 
     <!-- ======================================================== -->
@@ -319,7 +477,7 @@
               <span class="text-xs px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300">فيسبوك، لينكد إن، واتساب</span>
             </h2>
             <p class="text-xs text-slate-300 mt-1 leading-relaxed">
-              يرصد هذا الرادار أي منشور أو بوست ينشره مسؤولو التوظيف (Recruiters / Talent Acquisition) في جروبات فيسبوك لخريجي اللغات والترجمة، ومتحدثي التركي في مصر، مع استخراج رقم الواتساب المباشر وإيميل الـ HR لتتواصل معهم فوراً دون وسيط.
+              يرصد هذا الرادار منشورات مسؤولي التوظيف (Recruiters / Talent Acquisition) في جروبات فيسبوك لخريجي اللغات والترجمة، ومتحدثي التركي في مصر، مع استخراج رقم الواتساب المباشر وإيميل الـ HR لتتواصل معهم فوراً دون وسيط.
             </p>
           </div>
         </div>
@@ -351,19 +509,19 @@
           <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-4">
             <div class="flex items-center justify-between">
               <h2 class="text-base font-bold text-white flex items-center gap-2">
-                <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                 <span>صائغ ومترجم السيرة الذاتية الذكي</span>
               </h2>
-              <span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-bold">ATS-Optimized</span>
+              <span class="text-xs px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 font-bold">ATS-Optimized</span>
             </div>
             
             <p class="text-xs text-slate-300 leading-relaxed">
-              اختر النموذج، واملأ بياناتك أو حتى <strong>اكتب كل ما يخصك باللغة العربية أو بأسلوبك البسيط</strong> وسيقوم محرك الذكاء الاصطناعي بصياغة سيرة ذاتية إنجليزية احترافية تبرز مهاراتك في اللغة التركية والإنجليزية وتضمن قبولك في كبرى الشركات العالمية.
+              اختر النموذج، واملأ بياناتك أو حتى <strong>اكتب كل ما يخصك باللغة العربية أو بأسلوبك البسيط</strong> وسيقوم المحرك بصياغة سيرة ذاتية إنجليزية احترافية تبرز مهاراتك في اللغة التركية والإنجليزية وتضمن قبولك في كبرى الشركات العالمية.
             </p>
 
             <!-- Mode Selector: Structured vs Narrative -->
             <div class="flex rounded-xl bg-slate-950 p-1 border border-slate-800">
-              <button id="cvModeStructuredBtn" class="flex-1 py-1.5 text-xs font-bold rounded-lg bg-emerald-600 text-white transition">
+              <button id="cvModeStructuredBtn" class="flex-1 py-1.5 text-xs font-bold rounded-lg bg-purple-600 text-white transition">
                 إدخال منظم (حقول)
               </button>
               <button id="cvModeNarrativeBtn" class="flex-1 py-1.5 text-xs font-bold rounded-lg text-slate-400 hover:text-white transition">
@@ -375,7 +533,7 @@
             <div>
               <label class="block text-xs font-semibold text-slate-300 mb-1.5">اختر نموذج السيرة الذاتية (CV Template):</label>
               <div class="grid grid-cols-3 gap-2 text-xs">
-                <button type="button" data-tpl="modern" class="cv-tpl-btn p-2 rounded-xl border-2 border-emerald-500 bg-slate-950 text-white font-bold text-center transition">
+                <button type="button" data-tpl="modern" class="cv-tpl-btn p-2 rounded-xl border-2 border-purple-500 bg-slate-950 text-white font-bold text-center transition">
                   Corporate Modern
                 </button>
                 <button type="button" data-tpl="harvard" class="cv-tpl-btn p-2 rounded-xl border border-slate-700 bg-slate-950/60 text-slate-400 font-bold text-center hover:border-slate-500 transition">
@@ -391,28 +549,28 @@
             <div id="cvStructuredFields" class="space-y-3 text-xs">
               <div>
                 <label class="block font-semibold text-slate-300 mb-1">الاسم بالإنجليزية (Full Name)</label>
-                <input type="text" id="cvFullName" value="Ahmed M. Hassan" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-emerald-500 font-medium">
+                <input type="text" id="cvFullName" value="Ahmed M. Hassan" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-purple-500 font-medium">
               </div>
 
               <div class="grid grid-cols-2 gap-2">
                 <div>
                   <label class="block font-semibold text-slate-300 mb-1">المسمى المستهدف</label>
-                  <input type="text" id="cvTargetRole" value="Bilingual Turkish & English Support Specialist" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-emerald-500">
+                  <input type="text" id="cvTargetRole" value="Bilingual Turkish & English Support Specialist" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-purple-500">
                 </div>
                 <div>
                   <label class="block font-semibold text-slate-300 mb-1">المدينة / الدولة</label>
-                  <input type="text" id="cvLocation" value="Cairo, Egypt" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-emerald-500">
+                  <input type="text" id="cvLocation" value="Cairo, Egypt" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-purple-500">
                 </div>
               </div>
 
               <div class="grid grid-cols-2 gap-2">
                 <div>
                   <label class="block font-semibold text-slate-300 mb-1">البريد الإلكتروني</label>
-                  <input type="email" id="cvEmail" value="ahmed.turkish.pro@gmail.com" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-emerald-500 dir-ltr text-right">
+                  <input type="email" id="cvEmail" value="ahmed.turkish.pro@gmail.com" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-purple-500 dir-ltr text-right">
                 </div>
                 <div>
                   <label class="block font-semibold text-slate-300 mb-1">رقم الهاتف / واتساب</label>
-                  <input type="text" id="cvPhone" value="+20 10 1234 5678" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-emerald-500 dir-ltr text-right">
+                  <input type="text" id="cvPhone" value="+20 10 1234 5678" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-purple-500 dir-ltr text-right">
                 </div>
               </div>
 
@@ -435,35 +593,40 @@
 
               <div>
                 <label class="block font-semibold text-slate-300 mb-1">المؤهل الدراسي (Education)</label>
-                <input type="text" id="cvEducation" value="B.A. in Languages & Translation (Turkish Dept.), Cairo University - Very Good" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-emerald-500">
+                <input type="text" id="cvEducation" value="B.A. in Languages & Translation (Turkish Dept.), Cairo University - Very Good" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-purple-500">
               </div>
 
               <div>
                 <label class="block font-semibold text-slate-300 mb-1">الخبرات والمهارات السابقة (اكتبها بأي لغة وسنترجمها وننسقها)</label>
-                <textarea id="cvExperienceNotes" rows="3" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500" placeholder="مثال: اشتغلت سنة في كول سنتر تركي، بعرف أتعامل مع زنداك وورد وإكسيل، ترجمت مقالات، وسريع في الكتابة..."></textarea>
+                <textarea id="cvExperienceNotes" rows="3" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-purple-500" placeholder="مثال: اشتغلت سنة في كول سنتر تركي، بعرف أتعامل مع زنداك وورد وإكسيل، ترجمت مقالات، وسريع في الكتابة..."></textarea>
               </div>
             </div>
 
             <!-- Form Mode: Free Narrative Input ("اكتب كل حاجة عنك") -->
             <div id="cvNarrativeFields" class="hidden space-y-3 text-xs">
-              <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/20 text-slate-300">
-                <span class="font-bold text-emerald-400 block mb-1">💡 ميزة "اكتب كل حاجة عنك":</span>
-                اكتب قصتك بالعامية أو الفصحى، اسمك، دراستك، مستواك بالتركي والإنجليزي، البرامج اللي بتعرفها، وأي شغل اشتغلته، والذكاء الاصطناعي هيحول كل ده لـ CV بالإنجليزية الرسمية جاهز ومبهر!
+              <div class="p-3 rounded-xl bg-purple-950/40 border border-purple-500/20 text-slate-300">
+                <span class="font-bold text-purple-400 block mb-1">💡 ميزة "اكتب كل حاجة عنك":</span>
+                اكتب قصتك بالعامية أو الفصحى، اسمك، دراستك، مستواك بالتركي والإنجليزي، البرامج اللي بتعرفها، وأي شغل اشتغلته، والمحرك هيحول كل ده لـ CV بالإنجليزية الرسمية جاهز ومبهر!
               </div>
 
-              <textarea id="cvRawNarrativeText" rows="9" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 text-xs leading-relaxed" placeholder="انا اسمي مصطفى، خريج لغات وترجمة قسم تركي سنة 2023 بتقدير جيد جدا. بتكلم تركي بطلاقة مستوى C1 وانجليزي كويس جدا مستوى B2. اشتغلت في خدمة عملاء لشركة سياحة تركية لمدة سنة وحليت مشاكل الحجوزات وكتبت إيميلات وشات. بعرف استخدم Zendesk و CRM ومايكروسوفت اوفيس وسريع جدا في الكتابة..."></textarea>
+              <textarea id="cvRawNarrativeText" rows="9" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 text-xs leading-relaxed" placeholder="انا اسمي مصطفى، خريج لغات وترجمة قسم تركي سنة 2023 بتقدير جيد جدا. بتكلم تركي بطلاقة مستوى C1 وانجليزي كويس جدا مستوى B2. اشتغلت في خدمة عملاء لشركة سياحة تركية لمدة سنة وحليت مشاكل الحجوزات وكتبت إيميلات وشات. بعرف استخدم Zendesk و CRM ومايكروسوفت اوفيس وسريع جدا في الكتابة..."></textarea>
 
-              <button id="formulateFromNarrativeBtn" class="w-full py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl text-xs font-black transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-950/60">
+              <button id="formulateFromNarrativeBtn" class="w-full py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded-xl text-xs font-black transition flex items-center justify-center gap-2 shadow-lg shadow-purple-950/60">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                 <span>صياغة الـ CV الإنجليزي الاحترافي فوراً</span>
               </button>
             </div>
 
-            <!-- Generate / Update Button -->
-            <div class="pt-2">
-              <button id="updateCvPreviewBtn" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-black transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-950/50">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                <span>توليد وتحديث معاينة السيرة الذاتية (Live Preview)</span>
+            <!-- SAVE & UNLOCK JOBS BUTTON -->
+            <div class="pt-2 space-y-2">
+              <button id="saveAndUnlockCvBtn" class="w-full py-3.5 bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-500 hover:from-emerald-500 hover:to-teal-400 text-white rounded-xl text-xs font-black transition flex items-center justify-center gap-2 shadow-xl shadow-emerald-950/60 transform active:scale-95">
+                <svg class="w-5 h-5 text-emerald-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
+                <span>💾 حفظ وتفعيل السيرة الذاتية وفتح جميع الوظائف فوراً</span>
+              </button>
+
+              <button id="updateCvPreviewBtn" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 border border-slate-700">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                <span>تحديث المعاينة فقط (Preview)</span>
               </button>
             </div>
 
@@ -472,7 +635,7 @@
           <!-- Quick ATS Score Card -->
           <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800 text-xs flex items-center justify-between">
             <div class="flex items-center gap-3">
-              <div id="cvAtsScoreCircle" class="w-12 h-12 rounded-xl bg-emerald-500/20 border-2 border-emerald-500 text-emerald-400 flex items-center justify-center font-black text-base shrink-0">
+              <div id="cvAtsScoreCircle" class="w-12 h-12 rounded-xl bg-purple-500/20 border-2 border-purple-500 text-purple-400 flex items-center justify-center font-black text-base shrink-0">
                 94%
               </div>
               <div>
@@ -491,18 +654,18 @@
           <div class="bg-slate-900 p-3 rounded-2xl border border-slate-800 flex items-center justify-between flex-wrap gap-2 text-xs">
             <div class="flex items-center gap-2">
               <span class="font-bold text-white flex items-center gap-1.5">
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-purple-400 animate-pulse"></span>
                 <span>المعاينة المباشرة للسيرة الذاتية باللغة الإنجليزية:</span>
               </span>
             </div>
             
             <div class="flex items-center gap-2">
               <button id="copyCvTextBtn" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-bold transition flex items-center gap-1">
-                <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                <svg class="w-3.5 h-3.5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
                 <span>نسخ النص كاملاً</span>
               </button>
               
-              <button id="printCvBtn" class="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition flex items-center gap-1 shadow-md shadow-emerald-950/40">
+              <button id="printCvBtn" class="px-3.5 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold transition flex items-center gap-1 shadow-md shadow-purple-950/40">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
                 <span>طباعة / حفظ كـ PDF</span>
               </button>
@@ -521,7 +684,7 @@
     </section>
 
     <!-- ======================================================== -->
-    <!-- TAB 4: INTERACTIVE AI INTERVIEW SIMULATOR (CAMERA)       -->
+    <!-- TAB 4: INTERACTIVE INTERVIEW SIMULATOR (CAMERA & AUDIO)  -->
     <!-- ======================================================== -->
     <section id="tab-aiInterview" class="hidden space-y-6">
       
@@ -531,61 +694,62 @@
           <div>
             <h2 class="text-lg font-bold text-white flex items-center gap-2">
               <span class="w-3 h-3 rounded-full bg-red-600 animate-pulse"></span>
-              <span>محاكي مقابلات العمل بالذكاء الاصطناعي (مع الكاميرا والصوت)</span>
+              <span>محاكي المقابلات بالكاميرا والذكاء الاصطناعي</span>
+              <span class="text-xs px-2 py-0.5 rounded-full bg-red-600/20 text-red-300 font-black">كاميرا AI</span>
             </h2>
             <p class="text-xs text-slate-400 mt-1">
-              اختر الوظيفة الحقيقية التي تريد التقديم عليها، وافتح الكاميرا لتبدأ المقابلة التفاعلية مع شخصية الـ HR الافتراضية. المحادثة باللغة التركية مع أسئلة المقابلات العالمية بالإنجليزية، وفي النهاية يحلل لك أخطاءك ويعطيك الإجابات النموذجية.
+              اختر الوظيفة الحقيقية التي تريد التقديم عليها، وافتح الكاميرا لتبدأ المقابلة التفاعلية مع مسؤولة التوظيف. تتضمن المقابلة أسئلة المقابلات باللغة التركية (بما فيها سؤال الراتب المتوقع)، وأسئلة المقابلات الإنجليزية العالمية (عرف نفسك ولماذا تريد العمل معنا)، مع تحليل دقيق للأخطاء والبدائل النموذجية.
             </p>
           </div>
 
           <!-- Interview Target Job Selector -->
           <div class="w-full md:w-auto">
             <label class="block text-xs font-semibold text-slate-300 mb-1">الوظيفة المراد التدريب على مقابلتها:</label>
-            <select id="interviewJobSelector" class="w-full md:w-72 bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 font-bold">
+            <select id="interviewJobSelector" class="w-full md:w-72 bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500 font-bold">
               <!-- Populated via JS -->
             </select>
           </div>
         </div>
 
-        <!-- Video & AI Persona Split Screen -->
+        <!-- Video & Recruiter Persona Split Screen -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           
-          <!-- Recruiter Video Box (AI Persona) -->
+          <!-- Recruiter Video Box -->
           <div class="relative bg-slate-950 rounded-2xl border-2 border-slate-800 overflow-hidden aspect-video flex flex-col items-center justify-center p-4">
             
             <div class="absolute top-3 right-3 z-10 flex items-center gap-2">
               <span class="px-2 py-0.5 rounded-md bg-red-600 text-white text-[10px] font-black uppercase tracking-wider flex items-center gap-1">
                 <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
-                <span>AI Recruiter Live</span>
+                <span>Recruiter Live</span>
               </span>
               <span class="px-2 py-0.5 rounded-md bg-slate-800 text-slate-300 text-[10px] font-bold">
                 Selin Hanım (Lead Talent)
               </span>
             </div>
 
-            <!-- Animated Avatar / Recruiter Persona Graphic -->
+            <!-- Animated Avatar / Recruiter Graphic -->
             <div class="flex flex-col items-center text-center space-y-3">
-              <div id="recruiterAvatarGlow" class="w-24 h-24 rounded-full bg-gradient-to-tr from-emerald-600 via-teal-500 to-cyan-500 p-1 flex items-center justify-center shadow-xl shadow-emerald-950/60 transition duration-300">
+              <div id="recruiterAvatarGlow" class="w-24 h-24 rounded-full bg-gradient-to-tr from-red-600 via-rose-500 to-amber-500 p-1 flex items-center justify-center shadow-xl shadow-red-950/60 transition duration-300">
                 <div class="w-full h-full bg-slate-900 rounded-full flex items-center justify-center overflow-hidden">
-                  <svg class="w-12 h-12 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                  <svg class="w-12 h-12 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                 </div>
               </div>
               <div>
                 <h4 class="text-sm font-bold text-white">Selin Yılmaz</h4>
-                <p id="recruiterRoleLabel" class="text-xs text-emerald-400">Senior Talent Acquisition Partner</p>
+                <p id="recruiterRoleLabel" class="text-xs text-red-400">Senior Talent Acquisition Partner</p>
                 <div id="aiSpeakingWave" class="hidden mt-2 flex items-center justify-center gap-1">
-                  <span class="w-1 h-3 bg-emerald-400 animate-bounce"></span>
-                  <span class="w-1 h-5 bg-emerald-400 animate-bounce [animation-delay:0.2s]"></span>
-                  <span class="w-1 h-4 bg-emerald-400 animate-bounce [animation-delay:0.4s]"></span>
-                  <span class="w-1 h-6 bg-emerald-400 animate-bounce [animation-delay:0.1s]"></span>
-                  <span class="w-1 h-2 bg-emerald-400 animate-bounce [animation-delay:0.3s]"></span>
+                  <span class="w-1 h-3 bg-red-400 animate-bounce"></span>
+                  <span class="w-1 h-5 bg-red-400 animate-bounce [animation-delay:0.2s]"></span>
+                  <span class="w-1 h-4 bg-red-400 animate-bounce [animation-delay:0.4s]"></span>
+                  <span class="w-1 h-6 bg-red-400 animate-bounce [animation-delay:0.1s]"></span>
+                  <span class="w-1 h-2 bg-red-400 animate-bounce [animation-delay:0.3s]"></span>
                 </div>
               </div>
             </div>
 
             <!-- Sound toggle -->
             <div class="absolute bottom-3 left-3 z-10">
-              <button id="toggleAudioSpeechBtn" class="p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-emerald-400 border border-slate-700 text-xs font-bold transition flex items-center gap-1">
+              <button id="toggleAudioSpeechBtn" class="p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-red-400 border border-slate-700 text-xs font-bold transition flex items-center gap-1">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
                 <span id="audioSpeechStatus">الصوت: مفعل</span>
               </button>
@@ -606,13 +770,13 @@
               </div>
               <div>
                 <h4 class="text-sm font-bold text-white mb-1">كاميرا المرشح (Candidate Video)</h4>
-                <p class="text-xs text-slate-400 max-w-xs">اضغط على زر تشغيل الكاميرا لمحاكاة بيئة المقابلة الافتراضية مع تقييم لغة الجسد والحضور</p>
+                <p class="text-xs text-slate-400 max-w-xs">اضغط على زر تشغيل الكاميرا لمحاكاة بيئة المقابلة التفاعلية الحقيقية</p>
               </div>
             </div>
 
             <!-- Camera Controls Overlay -->
             <div class="absolute bottom-3 right-3 z-10 flex items-center gap-2">
-              <button id="toggleCameraBtn" class="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition flex items-center gap-1.5 shadow-lg shadow-emerald-950/60">
+              <button id="toggleCameraBtn" class="px-3 py-1.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs transition flex items-center gap-1.5 shadow-lg shadow-red-950/60">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                 <span id="cameraBtnLabel">تشغيل الكاميرا الآن</span>
               </button>
@@ -631,8 +795,8 @@
         <!-- Current Question Display -->
         <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-3">
           <div class="flex items-center justify-between flex-wrap gap-2 text-xs">
-            <span class="font-bold text-emerald-400 flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span class="font-bold text-red-400 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-red-400"></span>
               <span>السؤال الحالي (<span id="questionStepNum">1</span> من <span id="totalQuestionsNum">5</span>):</span>
             </span>
             <span id="questionLangBadge" class="px-2 py-0.5 rounded-full bg-red-600/20 text-red-300 border border-red-600/40 font-bold text-[11px]">
@@ -643,10 +807,10 @@
           <!-- Question Text in Turkish & English -->
           <div class="space-y-1">
             <h3 id="currentQuestionText" class="text-base font-bold text-white leading-relaxed dir-ltr text-left font-sans">
-              "Merhaba! Turkojob üzerinden başvurunuzu inceledim. Öncelikle bize kendinizden ve Türkçe öğrenme sürecinizden kısaca bahseder misiniz?"
+              "Merhaba! Turkojob üzerinden başvurunuzu inceledim..."
             </h3>
             <p id="currentQuestionTranslation" class="text-xs text-slate-400">
-              الترجمة والمغزى: مرحباً بك! يرجى تقديم نفسك باختصار مع ذكر كيف طوّرت لغتك التركية؟
+              الترجمة والمغزى...
             </p>
           </div>
 
@@ -656,7 +820,7 @@
               إجابتك (تحدث صوتياً أو اكتب إجابتك بالتركية/الإنجليزية):
             </label>
             <div class="relative">
-              <textarea id="candidateAnswerInput" rows="3" placeholder="Örnek: Merhaba Selin Hanım, adım Ahmed. 3 yıldır Türkçe dilinde müşteri ilişkileri alanında çalışıyorum..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 dir-ltr text-left"></textarea>
+              <textarea id="candidateAnswerInput" rows="3" placeholder="اكتب إجابتك هنا أو اضغط على 'تسجيل صوتي' أو زر 'تجربة إجابة نموذجية'..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-red-500 dir-ltr text-left"></textarea>
             </div>
             
             <div class="flex items-center justify-between flex-wrap gap-2 pt-1">
@@ -665,13 +829,13 @@
                   <svg class="w-4 h-4 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
                   <span id="micBtnText">تسجيل صوتي (Speech-to-Text)</span>
                 </button>
-                <button id="insertSampleAnswerBtn" class="text-xs text-emerald-400 hover:underline font-semibold">
+                <button id="insertSampleAnswerBtn" class="text-xs text-red-400 hover:underline font-semibold">
                   + تجربة إجابة نموذجية واقعية
                 </button>
               </div>
 
               <div class="flex items-center gap-2">
-                <button id="submitAnswerBtn" class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition flex items-center gap-1.5 shadow-md shadow-emerald-950/40">
+                <button id="submitAnswerBtn" class="px-5 py-2 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs transition flex items-center gap-1.5 shadow-md shadow-red-950/40">
                   <span>إرسال الإجابة والسؤال التالي</span>
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </button>
@@ -682,16 +846,16 @@
         </div>
 
         <!-- Post-Interview Diagnostic Results (Shown after finishing) -->
-        <div id="interviewReportSection" class="hidden p-6 rounded-2xl bg-gradient-to-r from-slate-950 to-slate-900 border-2 border-emerald-500/50 space-y-5">
+        <div id="interviewReportSection" class="hidden p-6 rounded-2xl bg-gradient-to-r from-slate-950 to-slate-900 border-2 border-red-500/50 space-y-5">
           <div class="flex items-center justify-between flex-wrap gap-3 border-b border-slate-800 pb-4">
             <div>
-              <span class="text-xs font-bold text-emerald-400 block mb-0.5">تقرير التقييم الشامل للمقابلة (AI Interview Audit)</span>
+              <span class="text-xs font-bold text-red-400 block mb-0.5">تقرير التقييم الشامل للمقابلة (Interview Audit)</span>
               <h3 class="text-lg font-bold text-white">نتيجة المقابلة والتحليل التشخيصي للأخطاء</h3>
             </div>
             <div class="flex items-center gap-3">
               <div class="text-center">
                 <span class="text-[10px] text-slate-400 block">درجة الجاهزية للقبول:</span>
-                <span id="interviewFinalScore" class="text-xl font-black text-emerald-400">88%</span>
+                <span id="interviewFinalScore" class="text-xl font-black text-red-400">90%</span>
               </div>
               <button id="restartInterviewBtn" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-bold text-xs transition">
                 إعادة المقابلة
@@ -703,7 +867,7 @@
           <div class="space-y-4">
             <h4 class="text-sm font-bold text-white flex items-center gap-2">
               <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-              <span>تحليل الأخطاء التي وقعت فيها وما كان يجب أن تقوله بدلاً منها (العبارات البديلة):</span>
+              <span>تحليل الأخطاء التي وقعت فيها وما كان يجب أن تقوله بدلاً منها (العبارات البديلة الموصى بها):</span>
             </h4>
 
             <div id="interviewAuditFeedbackList" class="space-y-3 text-xs">
@@ -726,7 +890,7 @@
         <div>
           <h2 class="text-lg font-bold text-white flex items-center gap-2">
             <span>محرك تحليل فرصة القبول وكشف النواقص (Gap Analysis)</span>
-            <span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-bold">Smart Matcher</span>
+            <span class="text-xs px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-bold">Smart Matcher</span>
           </h2>
           <p class="text-xs text-slate-400 mt-1">
             عدّل بياناتك ومهاراتك الحالية، وسترى فوراً النسبة المئوية الدقيقة لقبولك في كل وظيفة والنواقص المطلوب إضافتها لتصل إلى نسبة قبول 95% فما فوق.
@@ -754,7 +918,7 @@
           <!-- Acceptance Formula Card -->
           <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 text-xs space-y-4">
             <h4 class="font-bold text-white flex items-center gap-1.5">
-              <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+              <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
               معايير حساب نسبة القبول في Turkojob:
             </h4>
             <ul class="space-y-2 text-slate-300 pr-4 list-disc">
@@ -764,8 +928,8 @@
               <li><strong class="text-white">المرونة والجاهزية (10%):</strong> العمل بنظام الورديات أو العمل من المنزل بسلاسة.</li>
             </ul>
 
-            <div class="p-3.5 rounded-xl bg-emerald-950/40 border border-emerald-500/20 text-slate-300">
-              <span class="font-bold text-emerald-400 block mb-1">نصيحة HOCA للقبول:</span>
+            <div class="p-3.5 rounded-xl bg-amber-950/40 border border-amber-500/20 text-slate-300">
+              <span class="font-bold text-amber-400 block mb-1">نصيحة HOCA للقبول:</span>
               معظم الشركات في مصر والخليج تعطي الأولوية لطلاقة المحادثة واللباقة وسرعة حل المشكلات، حتى لو كانت خبرتك العملية سابقة في مجال آخر!
             </div>
           </div>
@@ -917,7 +1081,7 @@
       <div class="flex items-center justify-between gap-3 pt-3 border-t border-slate-800 flex-wrap">
         <button id="practiceThisJobInterviewBtn" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-xl text-xs font-bold transition flex items-center gap-1.5">
           <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-          <span>تدريب على مقابلة هذه الوظيفة (AI Interview)</span>
+          <span>تدريب على مقابلة هذه الوظيفة (Interview Practice)</span>
         </button>
 
         <a id="modalApplyLink" href="#" target="_blank" rel="noopener noreferrer" class="px-6 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 rounded-xl text-xs font-black transition flex items-center gap-2 shadow-lg shadow-emerald-950/60">
@@ -1155,25 +1319,25 @@
       },
       {
         id: "tj-rem-01",
-        title: "AI Generative Data Evaluator - Turkish Language",
-        titleAr: "مقيم نماذج ذكاء اصطناعي ومدقق جودة باللغة التركية (عن بُعد)",
-        company: "Outlier AI Tech",
+        title: "Turkish Simultaneous & Conference Interpreter (Remote)",
+        titleAr: "مترجم فوري ومترجم مؤتمرات ومحادثات باللغة التركية (عن بُعد)",
+        company: "TransPerfect / LanguageLine Solutions",
         location: "Remote",
         locationText: "عن بُعد بالكامل من المنزل (مصر والوطن العربي)",
-        category: "AI Training",
-        salary: "$18 - $24 / ساعة (~35,000 - 55,000 ج.م شهرياً)",
-        salaryNumeric: 45000,
+        category: "Simultaneous Translation",
+        salary: "$20 - $28 / ساعة (~40,000 - 60,000 ج.م شهرياً)",
+        salaryNumeric: 50000,
         reqTurkish: "C1",
         reqEnglish: "Intermediate",
         reqExpYears: 0,
         degreeRequired: false,
-        skills: ["AI Training", "Translation", "Quality Assurance", "Attention to Detail"],
-        description: "تدريب نماذج الذكاء الاصطناعي على فهم النبرة التركية الصحيحة، وتصحيح الأخطاء اللغوية والنحوية في ردود الروبوتات.",
-        applyUrl: "https://app.outlier.ai/expert/opportunities/4499046005",
-        backupUrl: "https://app.outlier.ai/",
-        hrContact: "experts-support@outlier.ai",
+        skills: ["Simultaneous Translation", "Live Interpretation", "Liaison", "Fast Typing", "Customer Service"],
+        description: "تقديم خدمات الترجمة الفورية والمحادثات المباشرة عبر مكالمات الفيديو لقطاعات الرعاية الصحية، المؤتمرات، والاجتماعات التجارية الدولية.",
+        applyUrl: "https://www.transperfect.com/careers/freelance",
+        backupUrl: "https://www.languageline.com/careers",
+        hrContact: "interpreters@transperfect.com",
         postedTime: "اليوم 10:45",
-        tips: "ساعات عمل مرنة تختارها بنفسك؛ تدفع بانتظام عبر PayPal أو الحساب البنكي."
+        tips: "ساعات عمل مرنة تختارها بنفسك؛ تتطلب تركيزاً واستماعاً جيداً دون الحاجة لشهادة تخصصية."
       },
       {
         id: "tj-rem-02",
@@ -1257,64 +1421,67 @@
     ];
 
     // ==========================================
-    // 3. AI MOCK INTERVIEW QUESTIONS DATABASE
+    // 3. INTERVIEW QUESTIONS DATABASE
     // ==========================================
     const INTERVIEW_QUESTIONS = [
       {
         qNum: 1,
-        lang: "Turkish",
-        flag: "🇹🇷",
-        questionTr: "Merhaba! Turkojob üzerinden başvurunuzu inceledim. Öncelikle bize kendinizden, eğitiminizden ve Türkçe öğrenme sürecinizden kısaca bahseder misiniz?",
-        translationAr: "مرحباً بك! يرجى تقديم نفسك باختصار مع ذكر دراستك وكيف طورت لغتك التركية؟",
-        bestPracticeAr: "ابدأ بالترحيب المهني (Merhaba Selin Hanım)، اذكر اسمك، تخرجك من قسم اللغة التركية، وشغفك بالعمل الدولي مع الأتراك.",
-        sampleIdealAnswer: "Merhaba Selin Hanım. Adım Ahmed. Üniversitede Türk Dili ve Tercümanlık bölümünden mezun oldum. Hem akıcı şekilde konuşabiliyor hem de yazılı iletişimde zorlanmıyorum. Uluslararası bir şirkette kariyerime başlamaktan büyük heyecan duyuyorum.",
-        commonMistakeAr: "التلعثم في نطق اللواحق الصوتية أو الإجابة المقتضبة بكلمة واحدة مثل 'Ben Ahmed, mezunum'."
+        lang: "English",
+        flag: "🇬🇧",
+        questionTr: "Let's begin in English: Could you please introduce yourself, tell us about your educational background, and highlight your greatest strengths?",
+        translationAr: "لنبدأ بالإنجليزية: هل يمكنك تقديم نفسك (عرف نفسك)، والحديث عن دراستك وخلفيتك، وتوضيح أبرز نقاط قوتك؟",
+        bestPracticeAr: "ابدأ بتعريف مهني منظم ومباشر دون إطالة، واذكر دراستك وخلفيتك اللغوية وتوافقها مع متطلبات الوظيفة.",
+        sampleIdealAnswer: "Certainly! My name is Ahmed. I graduated with a degree in Turkish Language and Translation. Over the past few years, I have strengthened my communication and problem-solving skills across customer support and language operations. My biggest strength is active listening, remaining calm under pressure, and quickly resolving customer challenges.",
+        commonMistakeAr: "سرد قصة شخصية لا علاقة لها بالعمل أو التردد الشديد والاكتفاء بجملة قصيرة مثل 'My name is Ahmed and that is it'."
       },
       {
         qNum: 2,
-        lang: "Turkish",
-        flag: "🇹🇷",
-        questionTr: "Çok güzel. Peki, zor bir Türk müşteriyle karşılaştığınızda ve müşteri kargo gecikmesi yüzünden çok öfkeliyken onu nasıl sakinleştirirsiniz?",
-        translationAr: "ممتاز. كيف تتعامل مع عميل تركي غاضب بسبب تأخر الشحنة وكيف تهدئ من روعه؟",
-        bestPracticeAr: "أظهر التعاطف (Empati) واستخدم مصطلحات الخدمة التركية: 'Sizi çok iyi anlıyorum', 'Hemen yardımcı oluyorum'.",
-        sampleIdealAnswer: "Öncelikle müşterinin sözünü kesmeden sakince dinlerim. 'Yaşadığınız gecikmeden dolayı çok üzgünüz, durumunuzu çok iyi anlıyorum. Sipariş numaranızı kontrol edip kargo firmasıyla derhal iletişime geçeceğim' diyerek çözüm odaklı güven veririm.",
-        commonMistakeAr: "الجدال مع العميل أو إلقاء اللوم على شركة الشحن بشكل مباشر (Kargo suçlu)."
+        lang: "English",
+        flag: "🇬🇧",
+        questionTr: "Why do you want to work with our company specifically, and what makes you choose us over other global employers?",
+        translationAr: "لماذا ترغب في العمل مع شركتنا تحديداً (عاوز تشتغل معانا ليه)، وما الذي يجعلك تفضلنا عن باقي الشركات؟",
+        bestPracticeAr: "أظهر معرفتك بالشركة وسمعتها في السوق، واربط بين طموحك المهني ومجال عمل الشركة لإثبات ولائك ورغبتك في الاستمرار.",
+        sampleIdealAnswer: "I have closely followed your company's remarkable market reputation, collaborative culture, and customer-centric approach. Your multinational environment provides the ideal platform for me to leverage my fluent Turkish and English skills. I am eager to contribute to your continuous success and build a rewarding, long-term career with your team.",
+        commonMistakeAr: "قول 'عشان الراتب عالي ومحتاج شغل' دون ذكر أي كلمة عن بيئة الشركة أو خدماتها."
       },
       {
         qNum: 3,
-        lang: "English",
-        flag: "🇬🇧",
-        questionTr: "Now switching to English for our global team: Could you describe your biggest strength and how it will help our customer operations team?",
-        translationAr: "باللغة الإنجليزية لفريقنا الدولي: ما هي أكبر نقاط قوتك وكيف ستفيد فريق خدمة العملاء لدينا؟",
-        bestPracticeAr: "استخدم طريقة STAR وركز على حل المشكلات وسرعة التعلم والعمل الجماعي.",
-        sampleIdealAnswer: "My biggest strength is active listening combined with fast problem-solving. In fast-paced customer support environments, I quickly grasp the root cause of issues and provide clear, empathetic solutions while maintaining high accuracy under pressure.",
-        commonMistakeAr: "الرد بإجابات عامة بدون أمثلة مثل 'I am hardworking and good person'."
+        lang: "Turkish",
+        flag: "🇹🇷",
+        questionTr: "Peki, bu pozisyon için net maaş beklentiniz nedir ve şirketimizin sunduğu yan haklar (prim, yemek kartı, özel sağlık sigortası) konusundaki düşünceleriniz nelerdir?",
+        translationAr: "ما هو توقعك للراتب الصافي في هذه الوظيفة (سؤال المرتب)، وما هي رؤيتك بخصوص المزايا الإضافية مثل المكافآت والتأمين الصحي؟",
+        bestPracticeAr: "لا تعطِ إجابة سلبية مثل 'أي مرتب يرضيكم' ولا تعاند برقم ثابت قطعي غير قابل للنقاش. اذكر نطاقاً مرناً (Range) يتماشى مع السوق، وأكد على أهمية بيئة العمل والتأمين والتطور المهني.",
+        sampleIdealAnswer: "Piyasa koşullarını ve şirketinizin bu pozisyon için uyguladığı adil ücret politikasını araştırdım. Pozisyonun gerektirdiği sorumluluklar ve iki dilli yetkinliklerim doğrultusunda aylık net 32.000 - 38.000 TL / EGP aralığında bir maaş ve kapsamlı özel sağlık sigortası içeren bir yan haklar paketi beklentim var. Ancak benim için en önemli öncelik, şirketiniz bünyesinde uzun vadeli ve istikrarlı bir kariyer geliştirmektir.",
+        commonMistakeAr: "قول 'Fark etmez, ne verirseniz kabul ederim' لأن ذلك يعكس عدم ثقة في النفس، أو التصلب برقم محدد ورفض التفاوض."
       },
       {
         qNum: 4,
         lang: "Turkish",
         flag: "🇹🇷",
-        questionTr: "Şirketimizde vardiyalı sistem uygulanıyor (gece veya hafta sonu vardiyaları olabiliyor). Bu çalışma saatlerine uyum sağlayabilir misiniz?",
-        translationAr: "نعمل بنظام الورديات المتغيرة (قد تشمل ورديات مسائية أو عطلات نهاية الأسبوع). هل لديك مرونة للالتزام بهذه الساعات؟",
-        bestPracticeAr: "أكد جاهزيتك التامة ومرونتك التنظيمية وأنك مهيأ ببيئة هادئة وإنترنت سريع.",
-        sampleIdealAnswer: "Kesinlikle evet. Zaman yönetimi konusunda çok disiplinliyim. Vardiyalı çalışma temposuna tamamen hazırım ve gerekli teknolojik donanıma (hızlı internet, sessiz çalışma ortamı) sahibim.",
-        commonMistakeAr: "التردد أو طلب وردية صباحية فقط في بداية المقابلة."
+        questionTr: "Çok güzel. Peki, zor bir Türk müşteriyle karşılaştığınızda ve müşteri kargo gecikmesi veya teknik bir problem yüzünden çok öfkeliyken onu nasıl sakinleştirirsiniz?",
+        translationAr: "ممتاز. كيف تتعامل مع عميل تركي غاضب بسبب تأخر الشحنة أو مشكلة تقنية وكيف تهدئ من روعه؟",
+        bestPracticeAr: "أظهر التعاطف (Empati) واستخدم مصطلحات الخدمة التركية: 'Sizi çok iyi anlıyorum', 'Hemen yardımcı oluyorum'.",
+        sampleIdealAnswer: "Öncelikle müşterinin sözünü kesmeden sakince dinlerim. 'Yaşadığınız gecikmeden dolayı çok üzgünüz, durumunuzu çok iyi anlıyorum. Sipariş numaranızı kontrol edip kargo ve operasyon ekibimizle derhal iletişime geçeceğim' diyerek çözüm odaklı güven veririm.",
+        commonMistakeAr: "الجدال مع العميل أو إلقاء اللوم على شركة الشحن بشكل مباشر (Kargo suçlu)."
       },
       {
         qNum: 5,
-        lang: "Turkish & English",
-        flag: "🇹🇷 / 🇬🇧",
-        questionTr: "Son olarak, neden başka bir şirketi değil de bizim şirketimizi tercih ediyorsunuz? / Why do you want to join our company specifically?",
-        translationAr: "ختاماً، لماذا تفضل الانضمام لشركتنا تحديداً دون غيرها؟",
-        bestPracticeAr: "امدح سمعة الشركة وبيئة العمل والتطور المهني الذي تبحث عنه.",
-        sampleIdealAnswer: "Çünkü şirketinizin sunduğu küresel standartlar, profesyonel ekip kültürü ve Türkçe dil becerilerimi en üst düzeyde kullanabileceğim mükemmel bir kariyer ortamı sağlıyor. Burada uzun vadeli değer katmak istiyorum.",
-        commonMistakeAr: "قول 'عشان الراتب عالي' فقط دون ذكر التطور المهني والولاء للشركة."
+        lang: "Turkish",
+        flag: "🇹🇷",
+        questionTr: "Şirketimizde vardiyalı ve esnek çalışma sistemi (gece veya hafta sonu vardiyaları olabiliyor) uygulanmaktadır. Bu çalışma saatlerine uyum sağlayabilir misiniz?",
+        translationAr: "نعمل بنظام الورديات المتغيرة والمرنة (قد تشمل ورديات مسائية أو عطلات نهاية الأسبوع). هل لديك مرونة للالتزام بهذه الساعات؟",
+        bestPracticeAr: "أكد جاهزيتك التامة ومرونتك التنظيمية وأنك مهيأ ببيئة هادئة وإنترنت سريع دون تردد.",
+        sampleIdealAnswer: "Kesinlikle evet. Zaman yönetimi konusunda son derece disiplinliyim. Vardiyalı çalışma temposuna tamamen hazırım ve evden kesintisiz çalışabilmek için gerekli hızlı internet, sessiz ortam ve teknolojik donanıma sahibim.",
+        commonMistakeAr: "التردد أو اشتراط وردية صباحية فقط في بداية المقابلة."
       }
     ];
 
     // ==========================================
     // 4. CANDIDATE STATE & PROFILE
+    // isCvSavedAndRegistered is false by default
     // ==========================================
+    let isCvSavedAndRegistered = false;
+
     let candidateData = {
       name: "Ahmed M. Hassan",
       targetRole: "Bilingual Turkish & English Support Specialist",
@@ -1325,13 +1492,13 @@
       englishLevel: "Intermediate",
       education: "B.A. in Languages & Translation (Turkish Dept.), Cairo University - Very Good",
       experienceYears: 1,
-      skills: ["Zendesk", "Customer Service", "Live Chat", "CRM", "Fast Typing", "Communication", "Problem Solving", "Email Support", "Content Moderation"],
+      skills: ["Zendesk", "Customer Service", "Live Chat", "CRM", "Fast Typing", "Communication", "Problem Solving", "Email Support", "Content Moderation", "Simultaneous Translation"],
       template: "modern"
     };
 
     const ALL_SKILLS_LIST = [
       "Zendesk", "Customer Service", "Live Chat", "CRM", "Email Support", 
-      "Content Moderation", "Social Media", "Fast Typing", "AI Training", 
+      "Content Moderation", "Social Media", "Fast Typing", "Simultaneous Translation", 
       "Translation", "Attention to Detail", "Quality Assurance", "Problem Solving", 
       "Microsoft Office", "Communication", "Operations"
     ];
@@ -1351,7 +1518,6 @@
       const candLevelVal = levelRank[profile.turkishLevel] || 4;
       const reqLevelVal = levelRank[job.reqTurkish] || 4;
 
-      // Turkish Language Score (40 pts)
       let langScore = 0;
       if (candLevelVal >= reqLevelVal) {
         langScore = 40;
@@ -1361,7 +1527,6 @@
         langScore = 15;
       }
 
-      // Skills & Tools Score (30 pts)
       let matchedSkills = [];
       let missingSkills = [];
       job.skills.forEach(skill => {
@@ -1374,13 +1539,10 @@
       const skillRatio = job.skills.length > 0 ? (matchedSkills.length / job.skills.length) : 1;
       const skillsScore = Math.round(skillRatio * 30);
 
-      // English & Experience Score (20 pts)
       let expScore = 15;
       if (profile.experienceYears >= job.reqExpYears) expScore = 20;
 
-      // Accessibility & Non-Degree bonus (10 pts)
       const degreeBonus = 10;
-
       const totalScore = Math.min(99, Math.max(30, langScore + skillsScore + expScore + degreeBonus));
 
       return {
@@ -1395,12 +1557,36 @@
     }
 
     // ==========================================
-    // 6. UI RENDERERS
+    // 6. UI RENDERERS & CV LOCK GATE
     // ==========================================
+    function updateCvLockState() {
+      const lockCard = document.getElementById("cvLockGateCard");
+      const unlockedContent = document.getElementById("unlockedJobsContent");
+      const headerStatus = document.getElementById("headerCvStatusText");
+
+      if (isCvSavedAndRegistered) {
+        if (lockCard) lockCard.classList.add("hidden");
+        if (unlockedContent) unlockedContent.classList.remove("hidden");
+        if (headerStatus) {
+          headerStatus.textContent = "مسجل ونشط (الوظائف مفتوحة)";
+          headerStatus.className = "text-emerald-400 font-bold";
+        }
+        renderJobs();
+      } else {
+        if (lockCard) lockCard.classList.remove("hidden");
+        if (unlockedContent) unlockedContent.classList.add("hidden");
+        if (headerStatus) {
+          headerStatus.textContent = "غير مسجل (الوظائف مقفلة)";
+          headerStatus.className = "text-amber-400 font-bold";
+        }
+      }
+    }
+
     function renderJobs() {
       const grid = document.getElementById("jobsGrid");
       const noJobs = document.getElementById("noJobsFound");
       const countLabel = document.getElementById("jobResultCount");
+      if (!grid) return;
 
       const searchVal = document.getElementById("filterSearch").value.toLowerCase().trim();
       const locVal = document.getElementById("filterLocation").value;
@@ -1595,14 +1781,14 @@
         "Zendesk & CRM Workflow Systems",
         "Live Chat & Email Etiquette",
         "Cross-Border Dispute Resolution",
-        "Content Moderation & Policy Adherence",
+        "Simultaneous & Direct Interpretation",
         "High-Speed Accurate Typing",
         "Cross-Functional Team Collaboration"
       ];
 
       const skillsGridHtml = coreSkillsFormatted.map(s => `
         <div class="flex items-center gap-1.5 text-slate-700">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-purple-600"></span>
           <span>${s}</span>
         </div>
       `).join('');
@@ -1610,9 +1796,9 @@
       if (tpl === "modern") {
         container.innerHTML = `
           <div class="space-y-6 text-slate-800">
-            <div class="border-b-2 border-emerald-600 pb-5">
+            <div class="border-b-2 border-purple-600 pb-5">
               <h1 class="text-3xl font-black tracking-tight text-slate-900">${candidateData.name}</h1>
-              <p class="text-emerald-700 font-bold text-sm tracking-wide mt-1 uppercase">${candidateData.targetRole}</p>
+              <p class="text-purple-700 font-bold text-sm tracking-wide mt-1 uppercase">${candidateData.targetRole}</p>
               
               <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-600 mt-2 font-medium">
                 <span>📍 ${candidateData.location}</span>
@@ -1636,9 +1822,9 @@
                 Language Proficiencies
               </h2>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                <div class="p-2.5 rounded-lg bg-emerald-50 border border-emerald-200">
-                  <span class="font-bold text-emerald-900 block">Turkish Language:</span>
-                  <span class="text-emerald-700 text-[11px]">${candidateData.turkishLevel} - Advanced Professional Fluency (Oral, Written, & Technical)</span>
+                <div class="p-2.5 rounded-lg bg-purple-50 border border-purple-200">
+                  <span class="font-bold text-purple-900 block">Turkish Language:</span>
+                  <span class="text-purple-700 text-[11px]">${candidateData.turkishLevel} - Advanced Professional Fluency (Oral, Written, & Technical)</span>
                 </div>
                 <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
                   <span class="font-bold text-slate-900 block">English Language:</span>
@@ -1746,7 +1932,7 @@
               </h2>
               <div class="text-xs space-y-1 font-sans text-slate-800">
                 <p><strong>Languages:</strong> Turkish (Fluency level ${candidateData.turkishLevel}), English (${candidateData.englishLevel}), Arabic (Native).</p>
-                <p><strong>Technical Skills:</strong> Zendesk, CRM Tools, Google Workspace, MS Office, Fast Typing (65+ WPM), Ticket Triage.</p>
+                <p><strong>Technical Skills:</strong> Zendesk, CRM Tools, Google Workspace, MS Office, Fast Typing (65+ WPM), Simultaneous Translation.</p>
               </div>
             </div>
           </div>
@@ -1759,7 +1945,7 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b-4 border-slate-900 pb-4 gap-2">
               <div>
                 <h1 class="text-3xl font-black text-slate-950 uppercase">${candidateData.name}</h1>
-                <p class="text-emerald-700 font-bold text-sm tracking-wide">${candidateData.targetRole}</p>
+                <p class="text-purple-700 font-bold text-sm tracking-wide">${candidateData.targetRole}</p>
               </div>
               <div class="text-xs text-slate-600 sm:text-right font-medium">
                 <div>${candidateData.email}</div>
@@ -1781,7 +1967,7 @@
                 <div class="space-y-1.5 text-xs">
                   <div class="flex justify-between border-b border-slate-100 pb-1">
                     <span class="font-bold">Turkish (Türkçe):</span>
-                    <span class="text-emerald-700 font-bold">${candidateData.turkishLevel} (Fluent)</span>
+                    <span class="text-purple-700 font-bold">${candidateData.turkishLevel} (Fluent)</span>
                   </div>
                   <div class="flex justify-between border-b border-slate-100 pb-1">
                     <span class="font-bold">English:</span>
@@ -1830,7 +2016,7 @@
     }
 
     // ==========================================
-    // 8. AI MOCK INTERVIEW LOGIC & WEBCAM
+    // 8. INTERVIEW LOGIC & WEBCAM
     // ==========================================
     function setupInterviewQuestionsDropdown() {
       const select = document.getElementById("interviewJobSelector");
@@ -1876,11 +2062,11 @@
         const wave = document.getElementById("aiSpeakingWave");
 
         utter.onstart = () => {
-          if (glow) glow.classList.add("ring-4", "ring-emerald-400", "scale-105");
+          if (glow) glow.classList.add("ring-4", "ring-red-400", "scale-105");
           if (wave) wave.classList.remove("hidden");
         };
         utter.onend = () => {
-          if (glow) glow.classList.remove("ring-4", "ring-emerald-400", "scale-105");
+          if (glow) glow.classList.remove("ring-4", "ring-red-400", "scale-105");
           if (wave) wave.classList.add("hidden");
         };
 
@@ -1927,7 +2113,7 @@
           <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
             <div class="flex items-center justify-between text-slate-300 font-bold border-b border-slate-800 pb-1.5">
               <span>السؤال ${idx + 1}: ${item.question.questionTr}</span>
-              <span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-emerald-400">${item.question.flag}</span>
+              <span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-red-400">${item.question.flag}</span>
             </div>
 
             <div class="text-slate-400">
@@ -1942,7 +2128,7 @@
               </div>
 
               <div class="p-2.5 rounded-lg bg-emerald-950/40 border border-emerald-500/30 text-emerald-200">
-                <span class="font-bold block text-emerald-300 mb-1">✨ ما كان يجب أن تقوله مكانها (الإجابة المقبولة):</span>
+                <span class="font-bold block text-emerald-300 mb-1">✨ ما كان يجب أن تقوله مكانها (الإجابة النموذجية):</span>
                 <p class="dir-ltr text-left font-sans text-[11px] font-semibold text-emerald-100">${item.question.sampleIdealAnswer}</p>
                 <p class="text-[10px] text-emerald-300 mt-1">${item.question.bestPracticeAr}</p>
               </div>
@@ -1985,9 +2171,9 @@
             badge.textContent = "🔴 الكاميرا تعمل (Live)";
             badge.className = "px-2 py-0.5 rounded-md bg-rose-600 text-white text-[10px] font-bold";
             isWebcamActive = true;
-            showToast("تم تشغيل الكاميرا بنجاح لمقابلة الذكاء الاصطناعي!", "success");
+            showToast("تم تشغيل الكاميرا بنجاح للمقابلة!", "success");
           } else {
-            showToast("متصفحك أو بيئة الأمان تمنع الوصول للكاميرا مباشرة؛ تم تفعيل وضع المحاكاة التفاعلية", "warning");
+            showToast("متصفحك يمنع الوصول للكاميرا مباشرة؛ تم تفعيل وضع المحاكاة التفاعلية", "warning");
           }
         } catch (err) {
           console.warn("Webcam access error:", err);
@@ -2105,8 +2291,7 @@
     }
 
     function startInterviewForJob(jobId) {
-      const interviewTabBtn = document.querySelector('[data-tab="aiInterview"]');
-      if (interviewTabBtn) interviewTabBtn.click();
+      switchSection("aiInterview");
 
       const selector = document.getElementById("interviewJobSelector");
       if (selector) selector.value = jobId;
@@ -2119,31 +2304,112 @@
     }
 
     // ==========================================
-    // 10. SETUP & INITIALIZATION
+    // 10. SWITCH SECTION FUNCTION (STACKED & ACCORDION)
+    // ==========================================
+    function switchSection(targetKey) {
+      // Hide all sections
+      document.querySelectorAll("main > section").forEach(sec => sec.classList.add("hidden"));
+      
+      // Show target section
+      const targetSec = document.getElementById(`tab-${targetKey}`);
+      if (targetSec) targetSec.classList.remove("hidden");
+
+      // Update stacked navigation cards active styling
+      document.querySelectorAll(".nav-stack-card").forEach(card => {
+        const key = card.getAttribute("data-nav-target");
+        if (key === targetKey) {
+          card.classList.add("nav-card-active");
+        } else {
+          card.classList.remove("nav-card-active");
+        }
+      });
+
+      if (targetKey === "cvBuilder") renderEnglishCvPreview();
+      if (targetKey === "social") renderSocialPosts();
+      if (targetKey === "profileAnalysis") renderGapAnalysisTab();
+      if (targetKey === "jobs") updateCvLockState();
+
+      // Smooth scroll down to main content for mobile friendliness
+      const mainContainer = document.getElementById("mainSectionsContainer");
+      if (mainContainer) {
+        mainContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    // ==========================================
+    // 11. SETUP & INITIALIZATION
     // ==========================================
     window.addEventListener("DOMContentLoaded", () => {
       
-      const tabBtns = document.querySelectorAll(".tab-btn");
-      tabBtns.forEach(btn => {
-        btn.addEventListener("click", () => {
-          const tabKey = btn.getAttribute("data-tab");
-          document.querySelectorAll("main > section").forEach(sec => sec.classList.add("hidden"));
-          const target = document.getElementById(`tab-${tabKey}`);
-          if (target) target.classList.remove("hidden");
-
-          tabBtns.forEach(b => {
-            b.classList.remove("border-emerald-500", "text-emerald-400");
-            b.classList.add("border-transparent", "text-slate-400");
-          });
-          btn.classList.add("border-emerald-500", "text-emerald-400");
-          btn.classList.remove("border-transparent", "text-slate-400");
-
-          if (tabKey === "cvBuilder") renderEnglishCvPreview();
-          if (tabKey === "social") renderSocialPosts();
-          if (tabKey === "profileAnalysis") renderGapAnalysisTab();
+      // Stacked Colored Navigation Cards Click Handlers
+      document.querySelectorAll(".nav-stack-card").forEach(card => {
+        card.addEventListener("click", () => {
+          const targetKey = card.getAttribute("data-nav-target");
+          switchSection(targetKey);
         });
       });
 
+      // Gateway Lock Handlers
+      const gateOpenCvBuilderBtn = document.getElementById("gateOpenCvBuilderBtn");
+      if (gateOpenCvBuilderBtn) {
+        gateOpenCvBuilderBtn.addEventListener("click", () => {
+          switchSection("cvBuilder");
+          showToast("تم فتح قسم السيرة الذاتية: املأ بياناتك ثم اضغط 'حفظ وتفعيل السيرة الذاتية' لفتح الوظائف", "info");
+        });
+      }
+
+      const gateQuickUnlockBtn = document.getElementById("gateQuickUnlockBtn");
+      if (gateQuickUnlockBtn) {
+        gateQuickUnlockBtn.addEventListener("click", () => {
+          isCvSavedAndRegistered = true;
+          updateCvLockState();
+          showToast("تم تفعيل حسابك وحفظ السيرة الذاتية بنجاح! تم فتح جميع الوظائف وروابط التقديم المباشرة.", "success");
+        });
+      }
+
+      const gateUploadFileInput = document.getElementById("gateUploadFileInput");
+      if (gateUploadFileInput) {
+        gateUploadFileInput.addEventListener("change", (e) => {
+          if (e.target.files && e.target.files[0]) {
+            isCvSavedAndRegistered = true;
+            updateCvLockState();
+            showToast(`تم رفع ملف (${e.target.files[0].name}) وتفعيل حسابك بنجاح! تم فتح الوظائف ونسب القبول.`, "success");
+          }
+        });
+      }
+
+      const lockJobsAgainBtn = document.getElementById("lockJobsAgainBtn");
+      if (lockJobsAgainBtn) {
+        lockJobsAgainBtn.addEventListener("click", () => {
+          isCvSavedAndRegistered = false;
+          updateCvLockState();
+          showToast("تمت إعادة قفل الوظائف لاختبار تجربة المستخدم الجديد", "info");
+        });
+      }
+
+      // Save and Unlock CV Button inside CV Builder
+      const saveAndUnlockCvBtn = document.getElementById("saveAndUnlockCvBtn");
+      if (saveAndUnlockCvBtn) {
+        saveAndUnlockCvBtn.addEventListener("click", () => {
+          candidateData.name = document.getElementById("cvFullName").value;
+          candidateData.targetRole = document.getElementById("cvTargetRole").value;
+          candidateData.location = document.getElementById("cvLocation").value;
+          candidateData.email = document.getElementById("cvEmail").value;
+          candidateData.phone = document.getElementById("cvPhone").value;
+          candidateData.education = document.getElementById("cvEducation").value;
+          
+          isCvSavedAndRegistered = true;
+          renderEnglishCvPreview();
+          updateCvLockState();
+          
+          showToast("تم حفظ السيرة الذاتية وتفعيل حسابك بنجاح! الانتقال لدليل الوظائف المفتوحة...", "success");
+          setTimeout(() => {
+            switchSection("jobs");
+          }, 800);
+        });
+      }
+
+      // Filter Inputs
       ["filterSearch", "filterLocation", "filterCategory", "filterMatch"].forEach(id => {
         const el = document.getElementById(id);
         if (el) {
@@ -2221,28 +2487,28 @@
       structBtn.addEventListener("click", () => {
         structFields.classList.remove("hidden");
         narrFields.classList.add("hidden");
-        structBtn.classList.add("bg-emerald-600", "text-white");
+        structBtn.classList.add("bg-purple-600", "text-white");
         structBtn.classList.remove("text-slate-400");
-        narrBtn.classList.remove("bg-emerald-600", "text-white");
+        narrBtn.classList.remove("bg-purple-600", "text-white");
         narrBtn.classList.add("text-slate-400");
       });
 
       narrBtn.addEventListener("click", () => {
         narrFields.classList.remove("hidden");
         structFields.classList.add("hidden");
-        narrBtn.classList.add("bg-emerald-600", "text-white");
+        narrBtn.classList.add("bg-purple-600", "text-white");
         narrBtn.classList.remove("text-slate-400");
-        structBtn.classList.remove("bg-emerald-600", "text-white");
+        structBtn.classList.remove("bg-purple-600", "text-white");
         structBtn.classList.add("text-slate-400");
       });
 
       document.querySelectorAll(".cv-tpl-btn").forEach(btn => {
         btn.addEventListener("click", () => {
           document.querySelectorAll(".cv-tpl-btn").forEach(b => {
-            b.classList.remove("border-2", "border-emerald-500", "text-white");
+            b.classList.remove("border-2", "border-purple-500", "text-white");
             b.classList.add("border-slate-700", "text-slate-400");
           });
-          btn.classList.add("border-2", "border-emerald-500", "text-white");
+          btn.classList.add("border-2", "border-purple-500", "text-white");
           btn.classList.remove("border-slate-700", "text-slate-400");
           candidateData.template = btn.getAttribute("data-tpl");
           renderEnglishCvPreview();
@@ -2264,7 +2530,7 @@
         }
 
         renderEnglishCvPreview();
-        showToast("قام الذكاء الاصطناعي بصياغة السيرة الذاتية باللغة الإنجليزية الرسمية بنجاح!", "success");
+        showToast("تمت صياغة السيرة الذاتية باللغة الإنجليزية الرسمية بنجاح!", "success");
       });
 
       document.getElementById("updateCvPreviewBtn").addEventListener("click", () => {
@@ -2321,7 +2587,8 @@
         showToast("تم فحص وتحديث أحدث منشورات وظائف التركي على فيسبوك ولينكد إن", "success");
       });
 
-      renderJobs();
+      // Initial Setup
+      updateCvLockState();
       renderSocialPosts();
       renderEnglishCvPreview();
       displayInterviewQuestion(0);
@@ -2335,7 +2602,7 @@
       let badgesHtml = "";
       ALL_SKILLS_LIST.forEach(skill => {
         const has = candidateData.skills.includes(skill);
-        const cls = has ? "bg-emerald-600 text-white border-emerald-500" : "bg-slate-950 text-slate-400 border-slate-800 hover:border-slate-700";
+        const cls = has ? "bg-amber-600 text-white border-amber-500" : "bg-slate-950 text-slate-400 border-slate-800 hover:border-slate-700";
         badgesHtml += `
           <button type="button" onclick="toggleCandidateSkill('${skill}')" class="px-3 py-1.5 rounded-xl border text-xs font-semibold transition ${cls}">
             ${has ? '✓ ' : '+ '}${skill}
